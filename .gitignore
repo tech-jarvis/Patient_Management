@@ -1,0 +1,37 @@
+# Environment
+.env
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.Python
+venv/
+.venv/
+env/
+.eggs/
+
+# Django
+staticfiles/
+media/
+*.log
+db.sqlite3
+
+# Node
+node_modules/
+Frontend/dist/
+Frontend/.vite/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Docker
+*.override.yml
