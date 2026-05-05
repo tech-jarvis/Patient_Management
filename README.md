@@ -95,7 +95,7 @@ Patient Management/
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/mzaid-3141/Patient_Management.git
+git clone https://github.com/tech-jarvis/Patient_Management.git
 cd Patient_Management
 
 # 2. Start all services (db → backend → frontend)
