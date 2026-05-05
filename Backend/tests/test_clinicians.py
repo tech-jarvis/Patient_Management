@@ -112,7 +112,9 @@ class TestClinicianDelete:
     def test_delete_success(self, auth_client, clinician):
         res = auth_client.delete(f'/api/clinicians/{clinician.id}/')
         assert res.status_code == 204
-        assert not Clinician.objects.filter(id=clinician.id).exists()
+        clinician.refresh_from_db()
+        assert clinician.is_deleted is True
+        assert auth_client.get(f'/api/clinicians/{clinician.id}/').status_code == 404
 
     def test_cannot_delete_other_clinic_clinician(self, auth_client, db):
         other = make_clinic(email='o@x.com', name='O')
@@ -127,7 +129,8 @@ class TestClinicianDelete:
         res = auth_client.delete(f'/api/clinicians/{clinician.id}/')
         assert res.status_code == 400
         assert 'detail' in res.data
-        assert Clinician.objects.filter(id=clinician.id).exists()
+        clinician.refresh_from_db()
+        assert clinician.is_deleted is False
 
     def test_can_delete_clinician_with_only_completed_appointments(self, auth_client, clinic, clinician):
         patient = make_patient(clinic)
